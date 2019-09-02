@@ -66,3 +66,15 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:+'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 }
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:+'
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:+'
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:+'
+}

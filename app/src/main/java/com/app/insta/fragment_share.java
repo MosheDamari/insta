@@ -34,12 +34,12 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link share_fragment.OnFragmentInteractionListener} interface
+ * {@link fragment_share.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link share_fragment#newInstance} factory method to
+ * Use the {@link fragment_share#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class share_fragment extends Fragment {
+public class fragment_share extends Fragment {
 
     ImageView shareImageView;
     Button galleryButton, cameraButton, shareButton;
@@ -62,7 +62,7 @@ public class share_fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public share_fragment() {
+    public fragment_share() {
         // Required empty public constructor
     }
 
@@ -72,11 +72,11 @@ public class share_fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment share_fragment.
+     * @return A new instance of fragment fragment_share.
      */
     // TODO: Rename and change types and number of parameters
-    public static share_fragment newInstance(String param1, String param2) {
-        share_fragment fragment = new share_fragment();
+    public static fragment_share newInstance(String param1, String param2) {
+        fragment_share fragment = new fragment_share();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -155,7 +155,7 @@ public class share_fragment extends Fragment {
                 @Override
                 public void onComplete(String url) {
                     Date d = new Date();
-                    Post myPost = new Post(MyApplication.getCurrentProfile().getId()+ d.getTime(), disc.getText().toString(), url,currentProfile.getAuthorName(),currentProfile.getAuthorImage());
+                    Post myPost = new Post(MyApplication.getCurrentProfile().getId()+ d.getTime(), disc.getText().toString(), url,currentProfile.getAuthorName(),currentProfile.getAuthorImage(), currentProfile.getId());
                     Model.instance.addPost(myPost, new Model.AddPostListener() {
                         @Override
                         public void onComplete(boolean success) {

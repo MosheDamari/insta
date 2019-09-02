@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login_fragment">
+    tools:context=".fragment_login">
 
     <EditText
         android:id="@+id/login_email"
@@ -42,7 +42,7 @@
         android:layout_width="309dp"
         android:layout_height="36dp"
         android:layout_marginBottom="104dp"
-        android:text="TextView"
+        android:text="@string/loginNew"
         app:layout_constraintBottom_toTopOf="@+id/login_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.441"

@@ -22,19 +22,17 @@ import com.app.insta.Model.ProfileViewMdoel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link login_fragment.OnFragmentInteractionListener} interface
+ * {@link fragment_login.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link login_fragment#newInstance} factory method to
+ * Use the {@link fragment_login#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class login_fragment extends Fragment {
+public class fragment_login extends Fragment {
     TextView email, password, name;
     Button login;
     ProfileViewMdoel model;
@@ -50,7 +48,7 @@ public class login_fragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public login_fragment() {
+    public fragment_login() {
         // Required empty public constructor
     }
 
@@ -60,11 +58,11 @@ public class login_fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment login_fragment.
+     * @return A new instance of fragment fragment_login.
      */
     // TODO: Rename and change types and number of parameters
-    public static login_fragment newInstance(String param1, String param2) {
-        login_fragment fragment = new login_fragment();
+    public static fragment_login newInstance(String param1, String param2) {
+        fragment_login fragment = new fragment_login();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -98,7 +96,7 @@ public class login_fragment extends Fragment {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(model.getCurrentUser() != null && model.getCurrentUser().getEmail().equalsIgnoreCase(email.getText().toString())) {
+                if(model.getCurrentUser() != null) {
                     model.getProfile(model.getmAuth().getUid(), new Model.GetProfileListener() {
                         @Override
                         public void onComplete(Profile profile) {

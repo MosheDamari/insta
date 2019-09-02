@@ -13,6 +13,16 @@ public class Post {
     @PrimaryKey
     @NonNull
     public String id;
+    public String authorID;
+
+    public String getAuthorID() {
+        return authorID;
+    }
+
+    public void setAuthorID(String authorID) {
+        this.authorID = authorID;
+    }
+
     public String author;
     public String authorAvatar;
     public String description;
@@ -48,12 +58,13 @@ public class Post {
     public Post(){
 
     }
-    public Post(String id, String description, String image, String author, String authorAvatar) {
+    public Post(String id, String description, String image, String author, String authorAvatar, String authorID) {
         this.id = id;
         this.description = description;
         this.postImage = image;
         this.author = author;
         this.authorAvatar = authorAvatar;
+        this.authorID = authorID;
 
     }
 

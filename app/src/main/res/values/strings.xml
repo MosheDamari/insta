@@ -18,5 +18,6 @@
     <string name="postText">PostText</string>
     <string name="login">Login\\Register</string>
     <string name="loginNew">First Time here enter a Name</string>
+    <string name="edit">Edit</string>
 
 </resources>

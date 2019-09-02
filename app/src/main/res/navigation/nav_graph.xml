@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/feed"
-        android:name="com.app.insta.feed_fragment"
+        android:name="com.app.insta.fragment_feed"
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed" >
         <action
@@ -16,10 +16,13 @@
         <action
             android:id="@+id/action_feed_to_profile"
             app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_feed_to_post"
+            app:destination="@id/post" />
     </fragment>
     <fragment
         android:id="@+id/share"
-        android:name="com.app.insta.share_fragment"
+        android:name="com.app.insta.fragment_share"
         android:label="fragment_share"
         tools:layout="@layout/fragment_share" >
         <action
@@ -34,14 +37,47 @@
         <action
             android:id="@+id/action_profile_to_share"
             app:destination="@id/share" />
+        <action
+            android:id="@+id/action_profile_to_edit_profile"
+            app:destination="@id/edit_profile" />
     </fragment>
     <fragment
         android:id="@+id/login"
-        android:name="com.app.insta.login_fragment"
+        android:name="com.app.insta.fragment_login"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_login_to_feed"
             app:destination="@id/feed" />
+    </fragment>
+    <fragment
+        android:id="@+id/post"
+        android:name="com.app.insta.fragment_post"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" >
+        <action
+            android:id="@+id/action_post_to_feed"
+            app:destination="@id/feed" />
+        <action
+            android:id="@+id/action_post_to_edit_post"
+            app:destination="@id/edit_post" />
+    </fragment>
+    <fragment
+        android:id="@+id/edit_profile"
+        android:name="com.app.insta.fragment_edit_profile"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_edit_profile_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/edit_post"
+        android:name="com.app.insta.fargment_edit_post"
+        android:label="fragment_edit_post"
+        tools:layout="@layout/fragment_edit_post" >
+        <action
+            android:id="@+id/action_edit_post_to_post"
+            app:destination="@id/post" />
     </fragment>
 </navigation>
