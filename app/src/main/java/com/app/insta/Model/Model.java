@@ -3,7 +3,7 @@ package com.app.insta.Model;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Model {
@@ -24,9 +24,30 @@ public class Model {
         void onComplete(boolean success);
     }
 
-    public void addProfile(Profile profile, AddProfileListener listener) {
+    public void addProfile(final Profile profile, AddProfileListener listener) {
         modelFirebase.addProfile(profile, listener);
+        PostAsyncDao.getAllPosts(new GetAllPostsListener() {
+            @Override
+            public void onComplete(List<Post> data) {
+                for(Post post : data){
+                    if(post.getAuthorID().equalsIgnoreCase(profile.getId())){
+                        post.setAuthorAvatar(profile.getAuthorImage());
+                        post.setAuthor(profile.getAuthorName());
+                    }
+                }
+                PostAsyncDao.addAllPost(data, new AddAllPostListener() {
+                    @Override
+                    public void onComplete(boolean success) {
+                    }
+                });
+                modelFirebase.addAllPosts(data, new AddAllPostListener() {
+                    @Override
+                    public void onComplete(boolean success) {
+                    }
+                });
 
+            }
+        });
     }
 
     public interface GetProfileListener{
@@ -45,37 +66,50 @@ public class Model {
     }
     public void getAllPosts(final GetAllPostsListener listener) {
         PostAsyncDao.getAllPosts(listener);
-        modelFirebase.getAllPosts(listener);
+        modelFirebase.getAllPosts(new GetAllPostsListener() {
+            @Override
+            public void onComplete(List<Post> data) {
+                addAllPost(data, new AddAllPostListener() {
+                    @Override
+                    public void onComplete(boolean success) {
+
+                    }
+                });
+            }
+        });
     }
     public interface GetPostListener {
         void onComplete(Post post);
     }
     public void getPost(String postID, final GetPostListener listener) {
         PostAsyncDao.getPost(postID,listener);
-
     }
     public interface AddPostListener{
         void onComplete(boolean success);
     }
     public void addPost(Post post, AddPostListener listener) {
-
-        PostAsyncDao.AddPost(post, listener);
+        PostAsyncDao.addPost(post, listener);
         modelFirebase.addPost(post, listener);
-
     }
-
+    public interface AddAllPostListener{
+        void onComplete(boolean success);
+    }
+    public void addAllPost(List<Post> posts, AddAllPostListener listener) {
+        PostAsyncDao.addAllPost(posts, listener);
+    }
     public interface EditPostListener{
         void onComplete(boolean success);
     }
-    public void editPost(Post post, EditPostListener listener){
-
+    public void editPost(String postID, String desc ,EditPostListener listener){
+        PostAsyncDao.editPost(postID, desc, listener);
     }
 
     public interface DeletePostListener{
         void onComplete(boolean success);
     }
-    public void deletePost(Post post, DeletePostListener listener){
-
+    public void deletePost(String post, DeletePostListener listener){
+        PostAsyncDao.deletePost(post, listener);
+        modelFirebase.deletePost(post,listener);
     }
 
     public interface SaveImageListener{

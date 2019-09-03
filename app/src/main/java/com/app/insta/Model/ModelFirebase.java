@@ -2,6 +2,7 @@ package com.app.insta.Model;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -26,7 +28,9 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -68,6 +72,18 @@ public class ModelFirebase {
             }
         });
     }
+    public void addAllPosts(List<Post> posts, final Model.AddAllPostListener listener) {
+        for(Post post : posts){
+            WriteBatch batch = db.batch();
+            batch.set(db.collection("posts").document(post.id), post);
+            batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    listener.onComplete(task.isSuccessful());
+                }
+            });
+        }
+    }
 
     public void addProfile(Profile profile, final Model.AddProfileListener listener) {
         db.collection("profiles").document(profile.id)
@@ -95,6 +111,19 @@ public class ModelFirebase {
                 });
     }
 
+
+    public void deletePost(String id, final Model.DeletePostListener listener) {
+        db.collection("posts").document(id).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    listener.onComplete(task.isSuccessful());
+                    return;
+                }
+                listener.onComplete(false);
+            }
+        });
+    }
 
     public void getProfile(String id, final Model.GetProfileListener listener) {
         db.collection("profiles").document(id).get()

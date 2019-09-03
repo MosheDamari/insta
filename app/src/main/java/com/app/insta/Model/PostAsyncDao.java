@@ -7,6 +7,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -19,16 +20,19 @@ interface PostDao {
     LiveData<List<Post>> getAllPosts();
 
     @Query("select * from Post where id = :id")
-    Post get(String id);
+    Post getPost(String id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Post... posts);
+    void insertAll(List<Post> posts);
 
     @Insert
     void insert(Post posts);
 
     @Delete
-    void delete(Post Post);
+    void delete(Post post);
+
+    @Update
+    void updatePost(Post post);
 }
 
 public class PostAsyncDao{
@@ -51,7 +55,7 @@ public class PostAsyncDao{
         }.execute();
 
     }
-    public static void AddPost(final Post post, final Model.AddPostListener listener) {
+    public static void addPost(final Post post, final Model.AddPostListener listener) {
         new AsyncTask<Post, Void, Boolean>(){
             @Override
             protected Boolean doInBackground(Post... posts) {
@@ -72,8 +76,8 @@ public class PostAsyncDao{
 
             @Override
             protected Post doInBackground(String... strings) {
-                Post Post = ModelSql.db.postDao().get(postID);
-                return Post;
+                Post post = ModelSql.db.postDao().getPost(postID);
+                return post;
             }
 
             @Override
@@ -84,5 +88,52 @@ public class PostAsyncDao{
             }
         }.execute();
 
+    }
+    public static void editPost(final String postID,final String desc, final Model.EditPostListener listener) {
+        new AsyncTask<String,String,Boolean>(){
+            @Override
+            protected Boolean doInBackground(String... strings) {
+                Post post = ModelSql.db.postDao().getPost(postID);
+                post.setDescription(desc);
+                ModelSql.db.postDao().updatePost(post);
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                super.onPostExecute(success);
+                listener.onComplete(success);
+            }
+        }.execute();
+    }
+    public static void addAllPost(final List<Post> postList, final Model.AddAllPostListener listener) {
+        new AsyncTask<Post,String,Boolean>(){
+            @Override
+            protected Boolean doInBackground(Post... posts) {
+                ModelSql.db.postDao().insertAll(postList);
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                super.onPostExecute(success);
+                listener.onComplete(success);
+            }
+        }.execute();
+    }
+    public static void deletePost(final String postID, final Model.DeletePostListener listener) {
+        new AsyncTask<String,String,Boolean>(){
+            @Override
+            protected Boolean doInBackground(String... strings) {
+                ModelSql.db.postDao().delete(ModelSql.db.postDao().getPost(postID));
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                super.onPostExecute(success);
+                listener.onComplete(success);
+            }
+        }.execute();
     }
 }

@@ -22,6 +22,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/profile_author_email"
+        android:layout_width="137dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/userEmail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_author_name"
+        app:layout_constraintVertical_bias="0.034" />
+
+    <EditText
+        android:id="@+id/profile_edit_name"
+        android:layout_width="129dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.114" />
+
+    <TextView
         android:id="@+id/profile_author_name"
         android:layout_width="123dp"
         android:layout_height="27dp"
@@ -33,16 +61,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.142" />
 
+    <EditText
+        android:id="@+id/profile_edit_email"
+        android:layout_width="146dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.212" />
+
     <TextView
         android:id="@+id/profile_author_disc"
         android:layout_width="346dp"
         android:layout_height="272dp"
         android:text="@string/authorDescription"
-        app:layout_constraintBottom_toTopOf="@+id/profile_edit_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_avatar" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_avatar"
+        app:layout_constraintVertical_bias="0.055" />
+
+    <EditText
+        android:id="@+id/profile_edit_desc"
+        android:layout_width="338dp"
+        android:layout_height="266dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.707" />
 
     <Button
         android:id="@+id/profile_edit_button"
@@ -51,8 +108,32 @@
         android:text="@string/edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.051" />
+
+    <Button
+        android:id="@+id/profile_camera_button"
+        android:layout_width="162dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="44dp"
+        android:text="@string/camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/profile_edit_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.882" />
+
+    <Button
+        android:id="@+id/profile_gallery_button"
+        android:layout_width="154dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/gallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.882" />
 

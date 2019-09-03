@@ -64,7 +64,7 @@ class FeedListAdapter  extends RecyclerView.Adapter<FeedListAdapter.FeedRowViewH
         ImageView mAuthorImage;
         ImageView mPostImage;
         TextView mPostText;
-        String postID, postImage;
+        String postID, postImage, authorID;
 
 
         public FeedRowViewHolder(@NonNull final View itemView, final OnItemClickListener listener) {
@@ -82,7 +82,9 @@ class FeedListAdapter  extends RecyclerView.Adapter<FeedListAdapter.FeedRowViewH
                     postInfo.putString("aName",mPostAuthor.getText().toString());
                     postInfo.putString("disc",mPostText.getText().toString());
                     postInfo.putString("image",postImage);
-                    Navigation.findNavController(itemView).navigate(R.id.post,postInfo);
+                    postInfo.putString("authorID",authorID);
+                    Navigation.findNavController(itemView).navigate(R.id.post, postInfo);
+
                 }
             });
 
@@ -94,6 +96,11 @@ class FeedListAdapter  extends RecyclerView.Adapter<FeedListAdapter.FeedRowViewH
             postImage = post.getPostImage();
             Picasso.get().load(postImage).into(mPostImage);
             postID = post.getId();
+            authorID = post.getAuthorID();
+            if(post.getAuthorAvatar() != null && post.getAuthorAvatar() != ""){
+                Picasso.get().load(post.getAuthorAvatar()).into(mAuthorImage);
+            }
+
         }
     }
 }

@@ -20,4 +20,11 @@ public class FeedViewModel extends ViewModel {
     public LiveData<List<Post>> getPostList() {
         return postListLiveData;
     }
+    public void editPost(String postID, String desc,Model.EditPostListener listner){
+        Model.instance.editPost(postID, desc,listner);
+    }
+    public void deletePost(String postID, Model.DeletePostListener listner){
+        Model.instance.deletePost(postID ,listner);
+    }
+
 }

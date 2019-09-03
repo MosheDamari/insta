@@ -97,7 +97,7 @@ public class fragment_share extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_share, container, false);
-        currentProfile =MyApplication.getCurrentProfile();
+        currentProfile = MyApplication.getCurrentProfile();
         shareImageView = v.findViewById(R.id.image_view);
         galleryButton = v.findViewById(R.id.share_gallery_button);
         disc = v.findViewById(R.id.share_description_text);
@@ -149,7 +149,6 @@ public class fragment_share extends Fragment {
 
     public void sharePost(){
         if(shareImageView != null && disc.getText() != null){
-            boolean upload = false;
             Bitmap bitmap = ((BitmapDrawable) shareImageView.getDrawable()).getBitmap();
             Model.instance.saveImage(bitmap, new Model.SaveImageListener() {
                 @Override

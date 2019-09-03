@@ -12,6 +12,7 @@ public class Profile {
     public String authorName;
     public String authorImage;
     public String authorEmail;
+    public String authorDesc;
 
     @NonNull
     public String getId() {
@@ -20,6 +21,14 @@ public class Profile {
 
     public String getAuthorEmail() {
         return authorEmail;
+    }
+
+    public String getAuthorDesc() {
+        return authorDesc;
+    }
+
+    public void setAuthorDesc(String authorDesc) {
+        this.authorDesc = authorDesc;
     }
 
     public void setAuthorEmail(String authorEmail) {
@@ -37,7 +46,7 @@ public class Profile {
     public Profile(){
 
     }
-    public Profile(String id,String authorName,String authorImage, String authorEmail) {
+    public Profile(String id,String authorName, String authorEmail) {
         this.id = id;
         this.authorImage = authorImage;
         this.authorName = authorName;

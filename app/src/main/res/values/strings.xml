@@ -16,8 +16,11 @@
     <string name="passwordHint">Use A Strong Password</string>
     <string name="authorDescription">AuthorDescription</string>
     <string name="postText">PostText</string>
-    <string name="login">Login\\Register</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="delete">Delete</string>
     <string name="loginNew">First Time here enter a Name</string>
     <string name="edit">Edit</string>
+    <string name="done">Done</string>
 
 </resources>

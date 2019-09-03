@@ -14,6 +14,10 @@ public class Post {
     @NonNull
     public String id;
     public String authorID;
+    public String author;
+    public String authorAvatar;
+    public String description;
+    public String postImage;
 
     public String getAuthorID() {
         return authorID;
@@ -22,12 +26,6 @@ public class Post {
     public void setAuthorID(String authorID) {
         this.authorID = authorID;
     }
-
-    public String author;
-    public String authorAvatar;
-    public String description;
-    public String postImage;
-
 
     public void setId(@NonNull String id) {
         this.id = id;

@@ -34,7 +34,7 @@ import com.google.firebase.auth.AuthResult;
  */
 public class fragment_login extends Fragment {
     TextView email, password, name;
-    Button login;
+    Button login, register;
     ProfileViewMdoel model;
     Profile currentUserProfile;
     // TODO: Rename parameter arguments, choose names that match
@@ -106,11 +106,28 @@ public class fragment_login extends Fragment {
                     });
 
                 }else{
+                    Login();
+                }
+            }
+        });
+        register =  v.findViewById(R.id.login_register_button);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(model.getCurrentUser() != null) {
+                    model.getProfile(model.getmAuth().getUid(), new Model.GetProfileListener() {
+                        @Override
+                        public void onComplete(Profile profile) {
+                            MyApplication.currentProfile = profile;
+                            updateUI();
+                        }
+                    });
+
+                }else{
                     Register();
                 }
             }
         });
-
         return v;
     }
 
@@ -129,7 +146,7 @@ public class fragment_login extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Profile currentProfile = new Profile(model.getmAuth().getUid(),name.getText().toString(),"", email.getText().toString());
+                            Profile currentProfile = new Profile(model.getmAuth().getUid(),name.getText().toString(), email.getText().toString());
                             MyApplication.currentProfile = currentProfile;
                             model.addProfile(currentProfile, new Model.AddProfileListener() {
                                 @Override
@@ -139,14 +156,29 @@ public class fragment_login extends Fragment {
                             });
                             updateUI();
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(MyApplication.getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MyApplication.getContext(), "Registry failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
     }
-
+    public void Login() {
+        model.getmAuth().signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    model.getProfile(model.getmAuth().getUid(), new Model.GetProfileListener() {
+                        @Override
+                        public void onComplete(Profile profile) {
+                            MyApplication.currentProfile = profile;
+                            updateUI();
+                        }
+                    });
+                }else {
+                    Toast.makeText(MyApplication.getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
